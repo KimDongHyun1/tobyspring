@@ -15,12 +15,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class HelloApiTest {
     @Test
     void helloApi() {
-        // http localhost:8080/hello?name=spring
+        // http localhost:9090/app/hello?name=spring
         // restTemplate 보다 TestRestTemplate은 예외처리에서 테스트하기에 유리하다.
         TestRestTemplate rest = new TestRestTemplate();
 
         ResponseEntity<String> ret =
-                rest.getForEntity("http://localhost:8080/hello?name={name}", String.class, "Spring");
+                rest.getForEntity("http://localhost:9090/app/hello?name={name}", String.class, "Spring");
 
         assertThat(ret.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(ret.getHeaders().getFirst(HttpHeaders.CONTENT_TYPE)).startsWith(MediaType.TEXT_PLAIN_VALUE);
@@ -33,11 +33,11 @@ public class HelloApiTest {
         TestRestTemplate rest = new TestRestTemplate();
 
         ResponseEntity<String> ret =
-                rest.getForEntity("http://localhost:8080/hello?name=", String.class);
+                rest.getForEntity("http://localhost:9090/app/hello?name=", String.class);
 
         assertThat(ret.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
-
-
     }
+
+
 
 }
